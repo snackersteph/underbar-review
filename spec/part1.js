@@ -331,8 +331,8 @@
       it('should handle iterators that work with a sorted array', function() {
         var iterator = function(value) { return value === 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
-
-        expect(_.uniq(numbers.slice(0,3))).to.eql([1, 2]);
+        // added in the isSorted, iterator parameters on line 335
+        expect(_.uniq(numbers, true, iterator)).to.eql([1, 2]);
       });
 
       it('should produce a brand new array instead of modifying the input array', function() {
@@ -399,7 +399,7 @@
           { name: 'curly', age: 50 }
         ];
 
-        expect(_.pluck(people, 'name')).to.equal(['moe', 'curly']);
+        expect(_.pluck(people, 'name')).to.eql(['moe', 'curly']);
       });
 
       it('should not modify the original array', function() {
