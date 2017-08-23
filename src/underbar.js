@@ -273,7 +273,7 @@
       var currentObj = val;
       _.each(currentObj, function (val,key){
         if (obj[key] === undefined){
-            obj[key] = val;
+          obj[key] = val;
         }
       });
     });
@@ -328,7 +328,7 @@
 
     return function(val){
       var val = arguments;
-      if( alreadyComputedVals[JSON.stringify(val)] === undefined){
+      if ( alreadyComputedVals[JSON.stringify(val)] === undefined){
         alreadyComputedVals[JSON.stringify(val)] = func.apply(this,val);
       } 
 
@@ -359,7 +359,6 @@
    */
 
   // Randomizes the order of an array's contents.
-  //
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
@@ -367,19 +366,23 @@
     var output = [];
     var scrambledInd = [];
 
-    for (var i = 0; i < array.length; i++ ){
-      while (scrambledInd.length < array.length){
-        var randomTry = Math.floor(Math.random())*array.length;
+    while (scrambledInd.length < array.length) {
         
-        scrambledInd.indexOf(randomTry == -1){
-          scrambledInd.push(randomTry);
-        }
+      var randomTry = Math.floor(Math.random() * array.length);
+      
+      if (_.indexOf(scrambledInd,randomTry) === -1){
+        scrambledInd.push(randomTry);
       }
+  
     }
 
-    for (var i = 0; i < scrambledInd.length; i++){
+    for (var i = 0; i < scrambledInd.length; i++) {
       output.push(array[scrambledInd[i]]);
     }
+
+    if (JSON.stringify(output) === JSON.stringify(array)) {
+      output = _.shuffle(array);
+    }    
 
     return output;
 
