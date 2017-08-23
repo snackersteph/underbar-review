@@ -184,21 +184,20 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    console.log("\nnew reduce() call ...")
-    if (accumulator !== undefined){
-      console.log("Accumulator provided is " + accumulator);
-      accumulator = accumulator;      
-    } else {
-      console.log("No accumulator. Now declaring it " + collection[0]);
-      accumulator = collection[0];
-    }
-    
-    _.each(collection, function(accumulator, item){
-      accumulator = accumulator + iterator(item);
+
+
+    var addingThirdParam = arguments.length === 2;
+    _.each(collection, function(value) {
+      if (addingThirdParam) {
+        accumulator = value;
+        addingThirdParam = false;
+      } else {
+        accumulator = iterator(accumulator, value);
+      }
     });
-    console.log('Final value of accumulator is ' + accumulator);
     return accumulator;
   };
+
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
